@@ -26,3 +26,4 @@ blaze-hot               # Update files using Blaze's API with HMR
 
 rspack@1.1.0                  # Integrate Rspack into Meteor for client and server app bundling
 meteortesting:mocha
+session

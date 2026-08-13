@@ -1,22 +1,34 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { MessagesCollection } from '../imports/api/messages.js'
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
+// -- Body Template --
+Template.body.helpers({
+  currentUser() {
+    return Session.get('currentUser');
   },
 });
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+
+// -- Login Template --
+Template.login.helpers({
+  currentUser(){
+    return Session.get('currentUser');
+  },
+});
+
+Template.login.events({
+  'click #login-button'(event, template){
+    const selected = template.find('#user-select').value;
+    if(selected){
+      Session.set('currentUser', selected);
+    }
+  },
+  'click #logout-button'(event){
+    Session.set('currentUser', null);
   },
 });
