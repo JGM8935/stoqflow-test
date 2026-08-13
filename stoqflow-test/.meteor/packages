@@ -25,3 +25,4 @@ hot-module-replacement@0.6.0  # Update code in development without reloading the
 blaze-hot               # Update files using Blaze's API with HMR
 
 rspack@1.1.0                  # Integrate Rspack into Meteor for client and server app bundling
+meteortesting:mocha
