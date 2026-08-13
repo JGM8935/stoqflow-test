@@ -1,26 +1,50 @@
 <head>
-  <title>stoqflow-test</title>
+  <title>Stoqflow Test - Meteor Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  {{> login}}
+  {{#if currentUser}}
+    {{> chat}}
+  {{/if}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="login">
+  <div class="login-box">
+    <h2>Inloggen</h2>
+    <select id="user-select">
+      <option value="">-- Kies gebruiker --</option>
+      <option value="userone">userone</option>
+      <option value="usertwo">usertwo</option>
+      <option value="receiver">receiver</option>
+    </select>
+    <button id="login-button">Inloggen</button>
+    {{#if currentUser}}
+      <p>Ingelogd als: <strong>{{currentUser}}</strong> <button id="logout-button">Uitloggen</button></p>
+    {{/if}}
+  </div>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="chat">
+  <div class="chat-box">
+    {{#if isReceiver}}
+      <h3>Gesprek met: </h3>
+      <select id="conversation-select">
+        <option value="userone">userone</option>
+        <option value="usertwo">usertwo</option>
+      </select>
+    {{/if}}
+
+    <div class="messages">
+      {{#each messages}}
+        <p><strong>{{from}}:</strong> {{text}}</p>
+      {{/each}}
+    </div>
+
+    <form id="send-form">
+      <input type="text" id="messages-text" placeholder="Typ een bericht ..." autocomplete="off" />
+      <button type="submit">Verstuur</button>
+    </form>
+  </div>
 </template>
